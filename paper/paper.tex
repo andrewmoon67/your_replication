@@ -1,0 +1,55 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\title{Replicating <one specific result> from <Author (Year)>}
+\author{Your Name}
+\date{\today}
+\begin{document}
+\maketitle
+\section{The Original Paper}
+% 1-2 paragraphs:
+% - Full citation
+% - The paper's central research question
+% - The empirical strategy in one or two sentences
+\section{The Result of Interest}
+% 1 paragraph:
+% - The specific table cell / figure panel / number you are replicating
+% - Why this particular result is the one worth reproducing
+% (Is it the headline number? The cleanest identification? Most cited?)
+\section{Data and Methods}
+% 1-2 paragraphs:
+% - Where the data came from
+% - What preprocess.py does
+% - What analysis.py does
+\section{Replication Results}
+% Include the table or figure produced by your code:
+\input{../output/tables/main_result.tex}
+% and / or
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=0.85\textwidth]
+{../output/figures/main_figure.png}
+ \caption{...}
+\end{figure}
+% 1-2 paragraphs:
+% - Compare your numbers to the paper's
+% - If they match: state that clearly and note any minor discrepancies
+% - If they don't match: be specific about the gap and your best guess at
+why
+% (data version, sample restrictions, software differences, etc.)
+\section{What I Learned}
+% 1-2 paragraphs (this section is REQUIRED and graded):
+% - What was easiest about the replication?
+% - What was hardest? (data prep is almost always the answer)
+% - What did you learn about reproducibility / about this paper that you
+% could only learn by doing the replication?
+replication_final.md 2026-05-21
+6 / 9
+% - If you were the original author, what would have made your work easier
+% to replicate?
+\begin{thebibliography}{9}
+\bibitem{paper} <full citation of the paper you replicated>
+\end{thebibliography}
+\end{document}
