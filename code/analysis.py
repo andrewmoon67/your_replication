@@ -59,22 +59,22 @@ print("=" * 55)
 # ── Write LaTeX table ────────────────────────────────────────────────────────
 latex = r"""\begin{table}[h]
 \centering
-\caption{Replication of Summary Employment Statistics (Table 5),
+\caption{Replication of Summary Employment Statistics,
          from Jardim et al.\ (2022)}
 \begin{tabular}{lccc}
 \hline
  & 2014 Q2 & 2016 Q2 & Change \\
 \hline
-Jobs paying $<\$19$/hr    & $%s$ & $%s$ & $%.1f\%%$ \\
-Hours worked $<\$19$/hr   & $%s$ & $%s$ & $%.1f\%%$ \\
-Avg.\ wage $<\$19$/hr     & $\$%.2f$ & $\$%.2f$ & $%.1f\%%$ \\
+Jobs paying $<\$19$/hr    & %.0f & %.0f & %.1f\%% \\
+Hours worked $<\$19$/hr   & %.0f & %.0f & %.1f\%% \\
+Avg.\ wage $<\$19$/hr     & \$%.2f & \$%.2f & %.1f\%% \\
 \hline
 \end{tabular}
 \label{tab:main}
 \end{table}""" % (
-    f"{jobs_base:,.0f}",  f"{jobs_end:,.0f}",  jobs_pct,
-    f"{hours_base:,.0f}", f"{hours_end:,.0f}",  hours_pct,
-    wage_base, wage_end, wage_pct
+    jobs_base,  jobs_end,  jobs_pct,
+    hours_base, hours_end, hours_pct,
+    wage_base,  wage_end,  wage_pct
 )
 
 with open(OUTPUT, "w") as f:

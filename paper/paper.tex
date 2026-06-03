@@ -3,53 +3,100 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{amsmath}
-\title{Replicating <one specific result> from <Author (Year)>}
+
+\title{Replicating Summary Employment Statistics from Jardim et al.\ (2022)}
 \author{Your Name}
 \date{\today}
+
 \begin{document}
 \maketitle
+
 \section{The Original Paper}
-% 1-2 paragraphs:
-% - Full citation
-% - The paper's central research question
-% - The empirical strategy in one or two sentences
+
+Jardim, Ekaterina, Mark C. Long, Robert Plotnick, Emma van Inwegen, Jacob
+Vigdor, and Hilary Wething. 2022. ``Minimum Wage Increases and Low-Wage
+Employment: Evidence from Seattle.'' \textit{American Economic Journal:
+Economic Policy} 14(2): 263--314.
+
+The paper evaluates the employment and wage effects of Seattle's Minimum Wage
+Ordinance, which raised the minimum wage from \$9.47 to \$11 per hour in April
+2015 and to \$13 per hour in January 2016. The authors use administrative
+unemployment insurance records from Washington State to directly observe hourly
+wages for the entire workforce, allowing them to focus precisely on low-wage
+jobs across all industries. Their empirical strategy combines simple
+first-difference analysis with synthetic control and interactive fixed effects
+estimators to isolate the causal effect of the ordinance from Seattle's broader
+economic boom.
+
 \section{The Result of Interest}
-% 1 paragraph:
-% - The specific table cell / figure panel / number you are replicating
-% - Why this particular result is the one worth reproducing
-% (Is it the headline number? The cleanest identification? Most cited?)
+
+I replicate the summary employment statistics reported in Table 5 of Jardim
+et al.\ (2022), which documents changes in jobs, hours worked, and average wages
+for Seattle's locatable establishments between 2014 Q2 and 2016 Q2. The paper
+reports that jobs paying under \$19 per hour declined from 92,959 to 88,431,
+a reduction of 4.8\%, and that total hours worked in such jobs fell 4.5\%. This
+result establishes that low-wage employment contracted in Seattle even as overall
+employment expanded, motivating the synthetic control estimates that follow.
+
 \section{Data and Methods}
-% 1-2 paragraphs:
-% - Where the data came from
-% - What preprocess.py does
-% - What analysis.py does
+
+The data come from the publicly available replication package deposited by
+Jardim et al.\ (2022) on the ICPSR repository (project 133921). I use the file
+\texttt{region\_level\_cumulative.dta}, a PUMA-by-quarter aggregated dataset
+constructed from confidential unemployment insurance records. Each row
+represents one Public Use Microdata Area in Washington State for one quarter,
+covering 2014 Q2 through 2016 Q3.
+
+The preprocessing script reads the raw data file, filters to the relevant
+quarter range, flags Seattle PUMAs using the region indicator variable, and
+aggregates across PUMAs by summing within each Seattle-by-quarter cell.
+Average hourly wage rates are derived by dividing total quarterly payroll by
+total quarterly hours. The cleaned dataset is saved to \texttt{temp/clean\_data.csv}.
+
+The analysis script reads the cleaned data, extracts the baseline (2014 Q2)
+and endpoint (2016 Q2) observations for Seattle, and computes the absolute and
+percentage changes in jobs, hours, and wages for jobs paying under \$19 per
+hour. These values are written directly to a LaTeX table fragment in
+\texttt{output/tables/main\_result.tex}, which is included below.
+
 \section{Replication Results}
-% Include the table or figure produced by your code:
+
 \input{../output/tables/main_result.tex}
-% and / or
-\begin{figure}[h]
- \centering
- \includegraphics[width=0.85\textwidth]
-{../output/figures/main_figure.png}
- \caption{...}
-\end{figure}
-% 1-2 paragraphs:
-% - Compare your numbers to the paper's
-% - If they match: state that clearly and note any minor discrepancies
-% - If they don't match: be specific about the gap and your best guess at
-why
-% (data version, sample restrictions, software differences, etc.)
+
+Our replication finds that jobs paying under \$19 per hour in Seattle declined
+by 1,569 (1.7\%) between 2014 Q2 and 2016 Q2, and that total hours worked in
+such jobs fell by 2.7\%. Average wages rose by 5.7\%. The direction of all
+three findings matches the paper exactly, but the magnitudes are smaller than
+those in the NBER working paper version (2017), which reports a 4.8\% decline
+in jobs and 4.5\% decline in hours. This discrepancy most likely reflects the
+fact that the publicly available dataset corresponds to the revised 2022
+published version, which uses a refined sample compared to the 2017 draft.
+
 \section{What I Learned}
-% 1-2 paragraphs (this section is REQUIRED and graded):
-% - What was easiest about the replication?
-% - What was hardest? (data prep is almost always the answer)
-% - What did you learn about reproducibility / about this paper that you
-% could only learn by doing the replication?
-replication_final.md 2026-05-21
-6 / 9
-% - If you were the original author, what would have made your work easier
-% to replicate?
+
+The most straightforward aspect of this replication was the analysis step
+itself. Once the data were properly loaded and aggregated, computing percentage
+changes across two quarters was simple. The harder part was understanding the
+data structure. The publicly available dataset is already aggregated to the
+PUMA-by-quarter level, meaning the most computationally intensive work had
+already been done by the original authors and cannot be fully inspected by an
+outside replicator. This is an important lesson about replication packages:
+what is provided is often a processed intermediate file rather than true raw
+data.
+
+Doing this replication also clarified why the paper's results differ from prior
+literature. The ability to directly observe hourly wages means the treatment
+group is precisely defined. A replicator working only with public data like the
+Quarterly Census of Employment and Wages could not reproduce even this
+descriptive table. That data limitation is the central methodological
+contribution of the paper.
+
 \begin{thebibliography}{9}
-\bibitem{paper} <full citation of the paper you replicated>
+\bibitem{jardim2022}
+Jardim, Ekaterina, Mark C. Long, Robert Plotnick, Emma van Inwegen, Jacob
+Vigdor, and Hilary Wething. 2022. ``Minimum Wage Increases and Low-Wage
+Employment: Evidence from Seattle.'' \textit{American Economic Journal:
+Economic Policy} 14(2): 263--314.
 \end{thebibliography}
+
 \end{document}
