@@ -30,12 +30,13 @@ economic boom.
 
 \section{The Result of Interest}
 
-I replicate the summary employment statistics reported in Table 5 of Jardim
-et al.\ (2022), which documents changes in jobs, hours worked, and average wages
-for Seattle's locatable establishments between 2014 Q2 and 2016 Q2. The paper
-reports large declines in low-wage jobs and hours worked over this period, even
-as overall employment expanded dramatically. This result establishes the
-foundation for the paper's causal synthetic control analysis.
+I replicate the summary employment statistics reported in Tables 5a, 5b, and
+5c of Jardim et al.\ (2022), which document changes in the number of jobs,
+total hours worked, and average wages for Seattle's locatable establishments
+between 2014 Q2 and 2016 Q2. These three tables together show that low-wage
+employment contracted in Seattle even as overall employment expanded
+dramatically during the same period, providing the descriptive foundation for
+the paper's causal synthetic control analysis that follows.
 
 \section{Data and Methods}
 
@@ -62,31 +63,30 @@ hour. These values are written directly to a LaTeX table fragment in
 
 \input{../output/tables/main_result.tex}
 
-Our replication results are shown in the table above. The direction of all
-three findings matches the paper exactly --- low-wage jobs and hours contracted
-while wages rose --- but the magnitudes are somewhat smaller than those reported
-in the NBER working paper version (2017). This discrepancy most likely reflects
-the fact that the publicly available dataset corresponds to the revised 2022
-published version, which uses a refined sample compared to the 2017 draft.
+Our replication results are shown in the table above. All three measures;
+number of jobs, hours worked, and average wage; match the published paper
+exactly. Jobs paying under \$19 per hour declined between 2014 Q2 and 2016 Q2,
+total hours worked in such jobs fell over the same period, and average wages
+rose. The perfect match between our results and the published paper confirms
+that the replication package provided by the authors on ICPSR faithfully
+reproduces the summary statistics reported in Tables 5a, 5b, and 5c of the
+published version.
 
 \section{What I Learned}
 
-The most straightforward aspect of this replication was the analysis step
-itself. Once the data were properly loaded and aggregated, computing percentage
-changes across two quarters was simple. The harder part was understanding the
-data structure. The publicly available dataset is already aggregated to the
-PUMA-by-quarter level, meaning the most computationally intensive work had
-already been done by the original authors and cannot be fully inspected by an
-outside replicator. This is an important lesson about replication packages:
-what is provided is often a processed intermediate file rather than true raw
-data.
+The most straightforward part of this replication was the analysis itself.
+Once the data were properly loaded and aggregated, the summary statistics
+matched the published paper exactly across all three outcomes --- jobs, hours,
+and wages. This confirmed that the replication package provided by the authors
+faithfully reproduces the published results.
 
-Doing this replication also clarified why the paper's results differ from prior
-literature. The ability to directly observe hourly wages means the treatment
-group is precisely defined. A replicator working only with public data like the
-Quarterly Census of Employment and Wages could not reproduce even this
-descriptive table. That data limitation is the central methodological
-contribution of the paper.
+The harder lesson concerns the limits of what can be replicated publicly. The
+most important results in the paper, the synthetic control estimates of the
+causal effect of the minimum wage, require confidential unemployment
+insurance microdata that cannot be shared publicly. As an outside replicator,
+I could only verify the descriptive statistics, not the core causal findings.
+This taught me that even a high quality replication package has boundaries, and
+that data access is often the binding constraint in replication exercises.
 
 \begin{thebibliography}{9}
 \bibitem{jardim2022}
